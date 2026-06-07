@@ -1,6 +1,7 @@
 import { games } from "@/app/data/games";
 import { notFound } from "next/navigation";
 import StatusButtons from "@/app/components/game/StatusButtons";
+import RatingSelector from "@/app/components/game/RatingSelector";
 
 type PageProps = {
   params: Promise<{
@@ -39,6 +40,8 @@ export default async function GamePage({
         </p>
 
         <StatusButtons />
+
+        <RatingSelector />
       </div>
     </main>
   );
