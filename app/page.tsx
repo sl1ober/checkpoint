@@ -1,6 +1,6 @@
 import Header from "@/app/components/layout/Header";
 import SearchBar from "@/app/components/ui/SearchBar";
-import GameCard from "@/app/components/game/GameCard";
+import GameCard from "@/app/game/GameCard";
 import { games } from "@/app/data/games";
 
 export default function HomePage() {
@@ -20,6 +20,7 @@ export default function HomePage() {
             {games.map((game) => (
               <GameCard
                 key={game.id}
+                id={game.id}
                 title={game.title}
                 genre={game.genre}
                 year={game.year}
