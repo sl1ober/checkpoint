@@ -1,6 +1,7 @@
 import Header from "@/app/components/layout/Header";
 import SearchBar from "@/app/components/ui/SearchBar";
 import GameCard from "@/app/components/game/GameCard";
+import { games } from "@/app/data/games";
 
 export default function HomePage() {
   return (
@@ -16,11 +17,14 @@ export default function HomePage() {
           </h2>
 
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-            <GameCard title="Elden Ring" />
-            <GameCard title="Cyberpunk 2077" />
-            <GameCard title="Baldur's Gate 3" />
-            <GameCard title="Metro Exodus" />
-            <GameCard title="Resident evil 4" />
+            {games.map((game) => (
+              <GameCard
+                key={game.id}
+                title={game.title}
+                genre={game.genre}
+                year={game.year}
+              />
+            ))}
           </div>
         </section>
       </div>
