@@ -1,10 +1,12 @@
-"use client";
+type RatingSelectorProps = {
+  rating: number | null;
+  onRatingChange: (rating: number) => void;
+};
 
-import { useState } from "react";
-
-export default function RatingSelector() {
-  const [rating, setRating] = useState<number | null>(null);
-
+export default function RatingSelector({
+  rating,
+  onRatingChange,
+}: RatingSelectorProps) {
   return (
     <div className="mt-8">
       <h3 className="mb-3 text-lg font-semibold">
@@ -16,7 +18,7 @@ export default function RatingSelector() {
           (value) => (
             <button
               key={value}
-              onClick={() => setRating(value)}
+              onClick={() => onRatingChange(value)}
               className={`h-10 w-10 rounded-lg border transition ${
                 rating === value
                   ? "border-yellow-400 bg-yellow-400 text-black"

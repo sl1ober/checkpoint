@@ -1,7 +1,3 @@
-"use client";
-
-import { useState } from "react";
-
 const statuses = [
   "Wishlist",
   "Playing",
@@ -10,17 +6,22 @@ const statuses = [
   "Dropped",
 ];
 
-export default function StatusButtons() {
-  const [selectedStatus, setSelectedStatus] =
-    useState<string | null>(null);
+type StatusButtonsProps = {
+  selectedStatus: string | null;
+  onStatusChange: (status: string) => void;
+};
 
+export default function StatusButtons({
+  selectedStatus,
+  onStatusChange,
+}: StatusButtonsProps) {
   return (
     <div className="mt-8">
       <div className="flex flex-wrap gap-3">
         {statuses.map((status) => (
           <button
             key={status}
-            onClick={() => setSelectedStatus(status)}
+            onClick={() => onStatusChange(status)}
             className={`rounded-lg border px-4 py-2 transition ${
               selectedStatus === status
                 ? "border-white bg-white text-black"
