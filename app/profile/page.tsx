@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { UserGame } from "@/app/types/user-game";
 import { getUserGames } from "@/app/lib/storage";
 import { games } from "@/app/data/games";
+import LibrarySection from "@/app/components/profile/LibrarySection";
 
 export default function ProfilePage() {
   const [userGames, setUserGames] =
@@ -14,6 +15,18 @@ export default function ProfilePage() {
 
     setUserGames(savedGames);
   }, []);
+
+  const completedGames = userGames.filter(
+    (game) => game.status === "Completed"
+  );
+
+  const playingGames = userGames.filter(
+    (game) => game.status === "Playing"
+  );
+
+  const wishlistGames = userGames.filter(
+    (game) => game.status === "Wishlist"
+  );
 
   return (
     <main className="min-h-screen bg-zinc-950 p-8 text-white">
@@ -26,36 +39,14 @@ export default function ProfilePage() {
           Games in library: {userGames.length}
         </p>
 
-        <div className="mt-8 space-y-4">
-          {userGames.map((userGame) => {
-            const game = games.find(
-              (game) => game.id === userGame.gameId
-            );
+        <h2 className="mt-10 text-2xl font-bold">
+          Completed Games ({completedGames.length})
+        </h2>
 
-            if (!game) {
-              return null;
-            }
-
-            return (
-              <div
-                key={userGame.gameId}
-                className="rounded-xl border border-zinc-800 p-4"
-              >
-                <h2 className="text-xl font-bold">
-                  {game.title}
-                </h2>
-
-                <p className="text-zinc-400">
-                  Status: {userGame.status}
-                </p>
-
-                <p className="text-zinc-400">
-                  Rating: {userGame.rating}/10
-                </p>
-              </div>
-            );
-          })}
-        </div>
+        <LibrarySection
+            title="Completed Games"
+            gamesList={completedGames}
+        />
       </div>
     </main>
   );
